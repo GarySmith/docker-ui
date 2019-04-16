@@ -1,7 +1,30 @@
-version: '3'
+version: '3.3'
 services:
-  app:
-    image: ui:latest
-    build: .
-    volumes:
-        - ..:/doc-cloud
+    ui:
+        image: ardana-installer-ui:latest
+        build:
+            context: ./ardana-installer-ui
+        ports:
+        - "2209:2209"
+    ardana-service:
+        environment:
+            # KEYSTONE_HOST should match the names defined below
+            KEYSTONE_HOST: keystone
+        image: ardana-service:latest
+        build:
+            context: ./ardana-service
+        ports:
+        - "9085:9085"
+    keystone:
+        environment:
+            # KEYSTONE_HOST should match the name of the app two lines above.  This 
+            # value is used to modify the endpoint URLs in the container so that they 
+            # match the application name, which is what the ardana-service uses to
+            # connect to it.
+            KEYSTONE_HOST: keystone
+        image: keystone:queens
+        build:
+            context: ./docker-keystone
+        ports:
+        - "5000"
+        - "35357"

@@ -1,0 +1,9 @@
+[submodule "ardana-service"]
+	path = ardana-service
+	url = https://github.com/ArdanaCLM/ardana-service.git
+[submodule "ardana-installer-ui"]
+	path = ardana-installer-ui
+	url = https://github.com/ArdanaCLM/ardana-installer-ui.git
+[submodule "keystone"]
+	path = docker-keystone
+	url = https://github.com/GarySmith/docker-keystone.git
